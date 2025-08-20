@@ -9,7 +9,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // Ausgabe zum Testen
-	
+	//!!!!Credentials normalerweise über secrets
 	$host = 'db'; // MariaDB-Container-Name oder Host (im Docker-Setup ist 'db' der Name des MariaDB-Containers)
 	$dbname = 'wordpress'; // Name der Datenbank
 	$username = 'wpuser'; // Dein MariaDB-Benutzername
@@ -29,10 +29,8 @@ echo "Verbindung zur Datenbank erfolgreich...<br>"; // Fehlerbehandlung aktivier
 }
     if(isset($_REQUEST['id']))
     {
-echo "Request...<br>";
         $res = $db->query("SELECT name FROM users WHERE id = ". $_REQUEST['id'])->fetch(PDO::FETCH_ASSOC); 
         echo "Willkommen ". $res['name'] ." <a href='/delete'>(Account löschen)</a>";
-    
     }
     else
     {

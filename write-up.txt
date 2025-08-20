@@ -1,0 +1,14 @@
+1. Dieser Part liest den Parameter fwd aus den Requests und leitet den Nutzer an einen 
+anderen Link weiter. Hier bietet sich für Angreifer die Möglichkeit URLs mit Links zu 
+schädlichen Seiten an Mitarbeiter zu versenden. Dies ist besonders Riskant da der schädliche Link in dem
+ vermeintlich bekannte service url besonders gut verschleiert ist.
+Hier stellt sich die Frage was der Nutzen der Weiterleitung ist. Könnten über den Nutzen URLs eingeschränkt 
+werden. Mein Verbesserungsvorschlag hier wäre nur bestimmte URLs als fwd Parameter zuzulassen und alle anderen
+Werte zu blocken.
+
+
+ 
+<script>
+    var fwd = "<?php echo $_REQUEST['fwd'] ?>";
+    if(fwd != ""){location.href = fwd;}
+</script>

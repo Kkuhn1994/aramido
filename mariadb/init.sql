@@ -12,3 +12,10 @@ CREATE TABLE IF NOT EXISTS users (
 
 INSERT INTO users (name) 
 VALUES ('user123');
+
+INSERT INTO users (name) 
+VALUES ('user345');
+
+INSERT INTO users (name) 
+VALUES ('user456');
+

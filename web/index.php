@@ -31,7 +31,7 @@ echo "Verbindung zur Datenbank erfolgreich...<br>"; // Fehlerbehandlung aktivier
     {
 echo "Request...<br>";
         $res = $db->query("SELECT name FROM users WHERE id = ". $_REQUEST['id'])->fetch(PDO::FETCH_ASSOC); 
-        echo "Willkommen". $res['name'] ." <a href='/delete'>(Account löschen)</a>";
+        echo "Willkommen ". $res['name'] ." <a href='/delete'>(Account löschen)</a>";
     
     }
     else

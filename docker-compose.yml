@@ -8,9 +8,26 @@ services:
        - "8080:80"
     volumes:
       - ./web:/var/www/html
+    networks:
+      inception:
+
   wordpress:
     build: wordpress/.
     container_name: aramido
     volumes:
       - ./web:/var/www/html
+    networks:
+      inception:
+    depends_on:
+      - mariadb
 
+  mariadb:
+    build: mariadb/.
+    container_name: db
+    networks:
+      inception:
+
+
+networks:
+  inception:
+    driver: bridge

@@ -6,9 +6,16 @@ Hier stellt sich die Frage was der Nutzen der Weiterleitung ist. Könnten über 
 werden. Mein Verbesserungsvorschlag hier wäre nur bestimmte URLs als fwd Parameter zuzulassen und alle anderen
 Werte zu blocken.
 
-
+Außerdem wäre es sinnvoll fwd durch ein Regex zu filtern.
+(!fwd.match(/^https?:\/\/([a-zA-Z0-9.-]+.com|[a-zA-Z0-9.-]+\.de)$/)
+um evtl XSS Attacken zu vermeiden.
+Im Browser durch die direkte Weiterleitung nicht möglich aber eventuell mit Burpsuite intercept nutzbar.
+Ansätze im Intercept schauen welche Escape Charactere evtl gebraucht werden. Gibt es ähnlich wie bei dem
+<img> Tag onerror Funktion oder ähnliche Workarounds um javascript direkt im href auszuführen?  
  
 <script>
     var fwd = "<?php echo $_REQUEST['fwd'] ?>";
     if(fwd != ""){location.href = fwd;}
 </script>
+
+möglicher Phishing-Link: service-url.de?fwd=maliciouslink 

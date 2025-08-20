@@ -40,5 +40,10 @@ http://192.168.2.110:8080/?id=id=-9546%20UNION%20ALL%20SELECT%20*%20FROM%20my_da
 
 
 ich vermute noch eine XSS Schwachstelle hier:
-
+---> Ich komme zu dem Ergebnis das eigentlich doch keine XSS Schwachstellen vorhanden sind da:
+1. sqlmap findet nichts
+2. wenn ich so drüber nachdenke wird kein user input auf der Seite angezeigt. --> nur das Ergebnis von dem Query
+3. Versuche XSS Payloads im Namen platzieren scheitern.
+http://192.168.2.110:8080/?id=1;%20UPDATE%20Users%20SET%20name=%27%22%3E%3Cscript%3Ealert(%22XSS%22)%3C/script%3E%27%20WHERE%20id=1
+--> payload ist auch nicht im Frontend zu sehen.
 

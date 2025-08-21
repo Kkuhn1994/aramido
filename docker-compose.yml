@@ -10,9 +10,12 @@ services:
       - ./web:/var/www/html
     networks:
       inception:
+    depends_on:
+      - mariadb
+      - php-site
 
-  wordpress:
-    build: wordpress/.
+  php-site:
+    build: php-site/.
     container_name: aramido
     volumes:
       - ./web:/var/www/html

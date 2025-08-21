@@ -1,0 +1,12 @@
+var fwd = "<?php echo $_REQUEST['fwd'] ?>";
+if(fwd != ""){location.href = fwd;}
+
+auch der 2 parameter ist wahrscheilich gegen XSS verwundbar
+http://192.168.2.110:8080/?fwd=%22;%20//
+
+
+XSS gefunden !!!!
+http://192.168.2.110:8080/?fwd=%22;%20alert(1);//
+
+
+

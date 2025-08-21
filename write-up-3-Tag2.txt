@@ -18,5 +18,6 @@ http://192.168.2.110:8080/?id=1;%20UPDATE%20users%20SET%20name=%27%3C/a%3E%3C/h2
 Empfehlung:
 Und alle SQL Keywords als Parameterinhalt blocken um SQL injection zu verhindern. und so verhindert man in diese fall gleichzeitig die XSS Attacke da man den Namen
 nicht ändern können sollte. 
-Sonderzeichen in URL Encodete charactere umwandeln.Diese werden im Frontend normal angezeigt triggern aber nicht den escape der für XSS erforderlich ist
+Entsprechede Librarys verwenden.
+
 

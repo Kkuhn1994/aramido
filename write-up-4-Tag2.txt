@@ -9,4 +9,7 @@ XSS gefunden !!!!
 http://192.168.2.110:8080/?fwd=%22;%20alert(1);//
 
 
+Empfehlung:
+Sonderzeichen in URL Encodete charactere umwandeln.Diese werden im Frontend normal angezeigt triggern aber nicht den escape der für XSS erforderlich ist 
+
 
